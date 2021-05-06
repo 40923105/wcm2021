@@ -60,7 +60,10 @@ path=%Disk%:;%path_python%;%path_portablegit%;%path_heroku%;</pre>
 <pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">REM for heroku login
 set HTTP_PROXY=http://[2001:288:6004:17::53]:3128
 set HTTPS_PROXY=http://[2001:288:6004:17::53]:3128</pre>
-<p>9由於使用自己電腦的是用 ipv4，如果加入了上面的 proxy 在之後的登入會遇到一些狀況，所以要在前面加上 REM 使其變成註解</p>
+<p>由於使用自己電腦的是用 ipv4，如果加入了上面的 proxy 在之後的登入會遇到一些狀況，所以要在前面加上 REM 使其變成註解</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">REM for heroku login
+REM set HTTP_PROXY=http://[2001:288:6004:17::53]:3128
+REM set HTTPS_PROXY=http://[2001:288:6004:17::53]:3128</pre>
 </li>
 <li>
 <p><span>利用 Heroku 同步 Github Pages 上的網站內容，只需要透過 git remote add，之後只要在 heroku login 狀態下，可以直接利用 git push 在近端設定一個連線到 Heroku 倉儲的代號，就能在每次更新 Github Pages 倉儲後， 再將內容同步至 Heroku</span></p>
@@ -80,4 +83,9 @@ heroku git:remote -a heroku app名稱</pre>
 <h2>W9</h2>
 <p>打期望成績</p>
 <h2>W10</h2>
-<p><span>到 </span><a href="http://a.kmol.info:88/">http://a.kmol.info:88/</a><span> 下載 </span>robodk522_kmol.7z</p>
+<ol>
+<li><a href="http://a.kmol.info:88/">http://a.kmol.info:88/</a><span> 下載 </span>robodk522_kmol.7z</li>
+<li><a href="https://sqlitebrowser.org/dl/">https://sqlitebrowser.org/dl/</a> 下載 DB Browser for SQLite - .zip (no installer) for 64-bit</li>
+</ol>
+<h2>W11</h2>
+<pre>至 <a href="http://a.kmol.info:88/">http://a.kmol.info:88/</a> 下載 robodk522_portable.7z</pre>
