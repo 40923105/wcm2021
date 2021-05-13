@@ -16,6 +16,692 @@
 <p>heroku網站:<span>40923102、40923104</span><span>、<a href="https://s40923105.herokuapp.com/content/index.html">40923105</a></span><span>、<a href="https://s40923106.herokuapp.com/content/index.html">40923106</a></span><span>、<a href="https://s40923107.herokuapp.com/content/index.html">40923107</a></span><span>、<a href="https://s40923110.herokuapp.com/content/index.html">40923110</a></span></p>
 <h2>W4</h2>
 <p><span>簡要說明網際內容管理課程開課緣由, 以及課程目標.</span><br/><span>其次說明 wcm2021 Topic0 專案執行目的.</span></p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">import requests
+import bs4
+# for os.environ and os.system()
+import os
+# for geting html file path
+import pathlib
+ 
+# for pythn 3.9
+ 
+'''
+url:  'class_ajax.php',
+data: { pselyr: pselyr, pselclss: pselclss
+'''
+semester = '1092'
+classno = '42311'
+column = True
+ 
+if semester == None:
+    semester = '1091'
+if classno == None:
+    # 42311 is 設一甲
+    classno = '42311'
+     
+headers = {'X-Requested-With': 'XMLHttpRequest'}
+ 
+url = 'https://qry.nfu.edu.tw/class_ajax.php'
+post_var = {'pselyr': semester, 'pselclss': classno}
+ 
+result = requests.post(url, data = post_var, headers = headers)
+ 
+soup = bs4.BeautifulSoup(result.content, 'lxml')
+ 
+# 先除掉所有 anchor
+for a in soup.findAll('a'):
+    # bs3 語法
+    #a.replaceWithChildren()
+    # bs4 語法, 將標註與內容拆開
+    a.unwrap()
+ 
+# 根據輸出設定, 取出 class='tbcls' 的 table 資料
+table = soup.find('table', {'class': 'tbcls'})
+ 
+# 重建 table, 設定邊線為 1 pixel
+output = "&lt;table border='1'&gt;"
+ 
+for i in table.contents:
+    # 利用 replace 復原  
+    output += str(i).replace("&amp;nbsp", " ")
+output += "&lt;/table&gt;"
+# print(output)
+# 將 output 寫入 w1_class_local.html
+with open("w1_class_local.html", "w", encoding="utf-8") as file:
+    file.write(output)
+# 利用 os.system() 以 default browser 開啟 w1_class_local.html
+filePath = pathlib.Path(__file__).parent.absolute()
+#print(filePath)
+# set firefox as default browser and start url to open html file
+os.system("start file:///" + str(filePath) + "\\w1_class_local.html")</pre>
+<table border="1" style="width: 800px; height: 1653px;">
+<tbody>
+<tr style="height: 31px;">
+<td colspan="15" style="width: 600px; height: 31px;"><center>國立虎尾科技大學 109 學年度第 2 學期<br/>四設計一甲 班級課表</center></td>
+</tr>
+<tr style="height: 20px;">
+<th rowspan="2" style="width: 31px; height: 41px;">當期課號</th>
+<th rowspan="2" style="width: 138px; height: 41px;">科目名稱</th>
+<th rowspan="2" style="width: 29px; height: 41px;">選別</th>
+<th rowspan="2" style="width: 10px; height: 41px;">學分數</th>
+<th rowspan="2" style="width: 14px; height: 41px;">時數</th>
+<th rowspan="2" style="width: 39px; height: 41px;">授課教師</th>
+<th colspan="7" style="width: 94px; height: 20px;">每週上課節次</th>
+<th rowspan="2" style="width: 105.4px; height: 41px;">地點</th>
+<th rowspan="2" style="width: 139.6px; height: 41px;">備註</th>
+</tr>
+<tr style="height: 21px;">
+<th style="width: 10px; height: 21px;">一</th>
+<th style="width: 10px; height: 21px;">二</th>
+<th style="width: 25px; height: 21px;">三</th>
+<th style="width: 14px; height: 21px;">四</th>
+<th style="width: 11px; height: 21px;">五</th>
+<th style="width: 13px; height: 21px;">六</th>
+<th style="width: 11px; height: 21px;">日</th>
+</tr>
+<tr style="height: 1px;">
+<td style="width: 31px; height: 1px;">0732</td>
+<td style="width: 138px; height: 1px;">通識教育講座</td>
+<td style="width: 29px; height: 1px;">必修</td>
+<td style="width: 10px; height: 1px;">1</td>
+<td style="width: 14px; height: 1px;">2</td>
+<td style="width: 39px; height: 1px;">李瑞麟</td>
+<td style="width: 10px; height: 1px;">
+<p></p>
+</td>
+<td style="width: 10px; height: 1px;">
+<p></p>
+</td>
+<td style="width: 25px; height: 1px;">
+<p></p>
+</td>
+<td style="width: 14px; height: 1px;">
+<p>7,8</p>
+</td>
+<td style="width: 11px; height: 1px;">
+<p></p>
+</td>
+<td style="width: 13px; height: 1px;">
+<p></p>
+</td>
+<td style="width: 11px; height: 1px;">
+<p></p>
+</td>
+<td style="width: 105.4px; height: 1px;">
+<p>學生活動中心 1F ASA0101 音樂廳</p>
+</td>
+<td style="width: 139.6px; height: 1px;">
+<p></p>
+</td>
+</tr>
+<tr style="height: 10px;">
+<td style="width: 31px; height: 10px;">0733</td>
+<td style="width: 138px; height: 10px;">國文(二)</td>
+<td style="width: 29px; height: 10px;">必修</td>
+<td style="width: 10px; height: 10px;">2</td>
+<td style="width: 14px; height: 10px;">2</td>
+<td style="width: 39px; height: 10px;">薛榕婷</td>
+<td style="width: 10px; height: 10px;">
+<p></p>
+</td>
+<td style="width: 10px; height: 10px;">
+<p>7,8</p>
+</td>
+<td style="width: 25px; height: 10px;">
+<p></p>
+</td>
+<td style="width: 14px; height: 10px;">
+<p></p>
+</td>
+<td style="width: 11px; height: 10px;">
+<p></p>
+</td>
+<td style="width: 13px; height: 10px;">
+<p></p>
+</td>
+<td style="width: 11px; height: 10px;">
+<p></p>
+</td>
+<td style="width: 105.4px; height: 10px;">
+<p>一期大樓 2F ATA0201 普通教室</p>
+</td>
+<td style="width: 139.6px; height: 10px;">
+<p></p>
+</td>
+</tr>
+<tr style="height: 45px;">
+<td style="width: 31px; height: 45px;">0734</td>
+<td style="width: 138px; height: 45px;">微積分(二)</td>
+<td style="width: 29px; height: 45px;">必修</td>
+<td style="width: 10px; height: 45px;">3</td>
+<td style="width: 14px; height: 45px;">3</td>
+<td style="width: 39px; height: 45px;">孫挺家</td>
+<td style="width: 10px; height: 45px;">
+<p>4,5,6</p>
+</td>
+<td style="width: 10px; height: 45px;">
+<p></p>
+</td>
+<td style="width: 25px; height: 45px;">
+<p></p>
+</td>
+<td style="width: 14px; height: 45px;">
+<p></p>
+</td>
+<td style="width: 11px; height: 45px;">
+<p></p>
+</td>
+<td style="width: 13px; height: 45px;">
+<p></p>
+</td>
+<td style="width: 11px; height: 45px;">
+<p></p>
+</td>
+<td style="width: 105.4px; height: 45px;">
+<p>第二期教學大樓 3F ATB0302 普通教室</p>
+</td>
+<td style="width: 139.6px; height: 45px;">
+<p></p>
+</td>
+</tr>
+<tr style="height: 10px;">
+<td style="width: 31px; height: 10px;">0735</td>
+<td style="width: 138px; height: 10px;">體育(二)</td>
+<td style="width: 29px; height: 10px;">必修</td>
+<td style="width: 10px; height: 10px;">0</td>
+<td style="width: 14px; height: 10px;">2</td>
+<td style="width: 39px; height: 10px;">洪櫻花</td>
+<td style="width: 10px; height: 10px;">
+<p>7,8</p>
+</td>
+<td style="width: 10px; height: 10px;">
+<p></p>
+</td>
+<td style="width: 25px; height: 10px;">
+<p></p>
+</td>
+<td style="width: 14px; height: 10px;">
+<p></p>
+</td>
+<td style="width: 11px; height: 10px;">
+<p></p>
+</td>
+<td style="width: 13px; height: 10px;">
+<p></p>
+</td>
+<td style="width: 11px; height: 10px;">
+<p></p>
+</td>
+<td style="width: 105.4px; height: 10px;">
+<p>經國體育館 B1 CPGB101 PU綜合球場</p>
+</td>
+<td style="width: 139.6px; height: 10px;">
+<p></p>
+</td>
+</tr>
+<tr style="height: 15px;">
+<td style="width: 31px; height: 15px;">0736</td>
+<td style="width: 138px; height: 15px;">服務學習(二)</td>
+<td style="width: 29px; height: 15px;">必修</td>
+<td style="width: 10px; height: 15px;">0</td>
+<td style="width: 14px; height: 15px;">2</td>
+<td style="width: 39px; height: 15px;">黃雅惠</td>
+<td style="width: 10px; height: 15px;">
+<p></p>
+</td>
+<td style="width: 10px; height: 15px;">
+<p></p>
+</td>
+<td style="width: 25px; height: 15px;">
+<p>7,8</p>
+</td>
+<td style="width: 14px; height: 15px;">
+<p></p>
+</td>
+<td style="width: 11px; height: 15px;">
+<p></p>
+</td>
+<td style="width: 13px; height: 15px;">
+<p></p>
+</td>
+<td style="width: 11px; height: 15px;">
+<p></p>
+</td>
+<td style="width: 105.4px; height: 15px;">
+<p>OAA0102 虛擬教室</p>
+</td>
+<td style="width: 139.6px; height: 15px;">
+<p>僅一年級可選修該門所屬班別課程，該班不提供給2-4年級之「重修生」及「轉學生」加選。</p>
+</td>
+</tr>
+<tr style="height: 6px;">
+<td rowspan="2" style="width: 31px; height: 57px;">0737 </td>
+<td rowspan="2" style="width: 138px; height: 57px;">靜力學 </td>
+<td rowspan="2" style="width: 29px; height: 57px;">必修 </td>
+<td rowspan="2" style="width: 10px; height: 57px;">3 </td>
+<td rowspan="2" style="width: 14px; height: 57px;">3 </td>
+<td rowspan="2" style="width: 39px; height: 57px;">尤尚邦 </td>
+<td style="width: 10px; height: 6px;">
+<p></p>
+</td>
+<td style="width: 10px; height: 6px;">
+<p></p>
+</td>
+<td style="width: 25px; height: 6px;">
+<p></p>
+</td>
+<td style="width: 14px; height: 6px;">
+<p>5</p>
+</td>
+<td style="width: 11px; height: 6px;">
+<p></p>
+</td>
+<td style="width: 13px; height: 6px;">
+<p></p>
+</td>
+<td style="width: 11px; height: 6px;">
+<p></p>
+</td>
+<td style="width: 105.4px; height: 6px;">
+<p>綜合工程一館 6F BGA0640 創意設計室</p>
+</td>
+<td style="width: 139.6px; height: 6px;">
+<p></p>
+</td>
+</tr>
+<tr style="height: 51px;">
+<td style="width: 10px; height: 51px;">
+<p></p>
+</td>
+<td style="width: 10px; height: 51px;">
+<p></p>
+</td>
+<td style="width: 25px; height: 51px;">
+<p></p>
+</td>
+<td style="width: 14px; height: 51px;">
+<p></p>
+</td>
+<td style="width: 11px; height: 51px;">
+<p>3,4</p>
+</td>
+<td style="width: 13px; height: 51px;">
+<p></p>
+</td>
+<td style="width: 11px; height: 51px;">
+<p></p>
+</td>
+<td style="width: 105.4px; height: 51px;">
+<p>綜合工程一館 7F BGA0710 研討室(二)</p>
+</td>
+<td style="width: 139.6px; height: 51px;">
+<p></p>
+</td>
+</tr>
+<tr style="height: 23px;">
+<td style="width: 31px; height: 23px;">0738</td>
+<td style="width: 138px; height: 23px;">物理實驗</td>
+<td style="width: 29px; height: 23px;">必修</td>
+<td style="width: 10px; height: 23px;">1</td>
+<td style="width: 14px; height: 23px;">2</td>
+<td style="width: 39px; height: 23px;">林誠孝</td>
+<td style="width: 10px; height: 23px;">
+<p></p>
+</td>
+<td style="width: 10px; height: 23px;">
+<p></p>
+</td>
+<td style="width: 25px; height: 23px;">
+<p>5,6</p>
+</td>
+<td style="width: 14px; height: 23px;">
+<p></p>
+</td>
+<td style="width: 11px; height: 23px;">
+<p></p>
+</td>
+<td style="width: 13px; height: 23px;">
+<p></p>
+</td>
+<td style="width: 11px; height: 23px;">
+<p></p>
+</td>
+<td style="width: 105.4px; height: 23px;">
+<p>機械工程館 4F AME0412 物理實驗室(一)</p>
+</td>
+<td style="width: 139.6px; height: 23px;">
+<p></p>
+</td>
+</tr>
+<tr style="height: 21px;">
+<td style="width: 31px; height: 21px;">0739</td>
+<td style="width: 138px; height: 21px;">工廠實習(二)CNC及CAM實習</td>
+<td style="width: 29px; height: 21px;">必修</td>
+<td style="width: 10px; height: 21px;">1</td>
+<td style="width: 14px; height: 21px;">3</td>
+<td style="width: 39px; height: 21px;">蕭俊卿</td>
+<td style="width: 10px; height: 21px;">
+<p>1,2,3</p>
+</td>
+<td style="width: 10px; height: 21px;">
+<p></p>
+</td>
+<td style="width: 25px; height: 21px;">
+<p></p>
+</td>
+<td style="width: 14px; height: 21px;">
+<p></p>
+</td>
+<td style="width: 11px; height: 21px;">
+<p></p>
+</td>
+<td style="width: 13px; height: 21px;">
+<p></p>
+</td>
+<td style="width: 11px; height: 21px;">
+<p></p>
+</td>
+<td style="width: 105.4px; height: 21px;">
+<p>綜合工程一館 8F BGA0810 電腦輔助設計室</p>
+</td>
+<td style="width: 139.6px; height: 21px;">
+<p></p>
+</td>
+</tr>
+<tr style="height: 28px;">
+<td style="width: 31px; height: 28px;">0740</td>
+<td style="width: 138px; height: 28px;">機械製圖(二)</td>
+<td style="width: 29px; height: 28px;">必修</td>
+<td style="width: 10px; height: 28px;">2</td>
+<td style="width: 14px; height: 28px;">4</td>
+<td style="width: 39px; height: 28px;">王培郁</td>
+<td style="width: 10px; height: 28px;">
+<p></p>
+</td>
+<td style="width: 10px; height: 28px;">
+<p></p>
+</td>
+<td style="width: 25px; height: 28px;">
+<p>1,2,3,4</p>
+</td>
+<td style="width: 14px; height: 28px;">
+<p></p>
+</td>
+<td style="width: 11px; height: 28px;">
+<p></p>
+</td>
+<td style="width: 13px; height: 28px;">
+<p></p>
+</td>
+<td style="width: 11px; height: 28px;">
+<p></p>
+</td>
+<td style="width: 105.4px; height: 28px;">
+<p>綜合工程一館 8F BGA0830 電腦輔助繪圖室</p>
+</td>
+<td style="width: 139.6px; height: 28px;">
+<p></p>
+</td>
+</tr>
+<tr style="height: 41px;">
+<td style="width: 31px; height: 41px;">0741</td>
+<td style="width: 138px; height: 41px;">網際內容管理</td>
+<td style="width: 29px; height: 41px;">選修</td>
+<td style="width: 10px; height: 41px;">3</td>
+<td style="width: 14px; height: 41px;">3</td>
+<td style="width: 39px; height: 41px;">嚴家銘</td>
+<td style="width: 10px; height: 41px;">
+<p></p>
+</td>
+<td style="width: 10px; height: 41px;">
+<p></p>
+</td>
+<td style="width: 25px; height: 41px;">
+<p></p>
+</td>
+<td style="width: 14px; height: 41px;">
+<p>2,3,4</p>
+</td>
+<td style="width: 11px; height: 41px;">
+<p></p>
+</td>
+<td style="width: 13px; height: 41px;">
+<p></p>
+</td>
+<td style="width: 11px; height: 41px;">
+<p></p>
+</td>
+<td style="width: 105.4px; height: 41px;">
+<p>綜合工程一館 8F BGA0810 電腦輔助設計室</p>
+</td>
+<td style="width: 139.6px; height: 41px;">
+<p></p>
+</td>
+</tr>
+<tr style="height: 41px;">
+<td style="width: 31px; height: 41px;">0742</td>
+<td style="width: 138px; height: 41px;">物理(二)</td>
+<td style="width: 29px; height: 41px;">必修</td>
+<td style="width: 10px; height: 41px;">3</td>
+<td style="width: 14px; height: 41px;">3</td>
+<td style="width: 39px; height: 41px;">林誠孝</td>
+<td style="width: 10px; height: 41px;">
+<p></p>
+</td>
+<td style="width: 10px; height: 41px;">
+<p>2</p>
+</td>
+<td style="width: 25px; height: 41px;">
+<p></p>
+</td>
+<td style="width: 14px; height: 41px;">
+<p></p>
+</td>
+<td style="width: 11px; height: 41px;">
+<p>5,6</p>
+</td>
+<td style="width: 13px; height: 41px;">
+<p></p>
+</td>
+<td style="width: 11px; height: 41px;">
+<p></p>
+</td>
+<td style="width: 105.4px; height: 41px;">
+<p>第二期教學大樓 1F ATB0101 普通教室</p>
+</td>
+<td style="width: 139.6px; height: 41px;">
+<p></p>
+</td>
+</tr>
+<tr style="height: 15px;">
+<td style="width: 31px; height: 15px;">無</td>
+<td style="width: 138px; height: 15px;">體育(二)</td>
+<td style="width: 29px; height: 15px;">無</td>
+<td style="width: 10px; height: 15px;">無</td>
+<td style="width: 14px; height: 15px;">無</td>
+<td style="width: 39px; height: 15px;"> </td>
+<td style="width: 10px; height: 15px;">7</td>
+<td style="width: 10px; height: 15px;"> </td>
+<td style="width: 25px; height: 15px;"> </td>
+<td style="width: 14px; height: 15px;"> </td>
+<td style="width: 11px; height: 15px;"> </td>
+<td style="width: 13px; height: 15px;"> </td>
+<td style="width: 11px; height: 15px;"> </td>
+<td style="width: 105.4px; height: 15px;"> </td>
+<td style="width: 139.6px; height: 15px;"> </td>
+</tr>
+<tr style="height: 1px;">
+<td style="width: 31px; height: 1px;">無</td>
+<td style="width: 138px; height: 1px;">體育(二)</td>
+<td style="width: 29px; height: 1px;">無</td>
+<td style="width: 10px; height: 1px;">無</td>
+<td style="width: 14px; height: 1px;">無</td>
+<td style="width: 39px; height: 1px;"> </td>
+<td style="width: 10px; height: 1px;">8</td>
+<td style="width: 10px; height: 1px;"> </td>
+<td style="width: 25px; height: 1px;"> </td>
+<td style="width: 14px; height: 1px;"> </td>
+<td style="width: 11px; height: 1px;"> </td>
+<td style="width: 13px; height: 1px;"> </td>
+<td style="width: 11px; height: 1px;"> </td>
+<td style="width: 105.4px; height: 1px;"> </td>
+<td style="width: 139.6px; height: 1px;"> </td>
+</tr>
+<tr style="height: 13px;">
+<td style="width: 31px; height: 13px;">無</td>
+<td style="width: 138px; height: 13px;">英語聽講練習(二)</td>
+<td style="width: 29px; height: 13px;">無</td>
+<td style="width: 10px; height: 13px;">無</td>
+<td style="width: 14px; height: 13px;">無</td>
+<td style="width: 39px; height: 13px;"> </td>
+<td style="width: 10px; height: 13px;"> </td>
+<td style="width: 10px; height: 13px;">3</td>
+<td style="width: 25px; height: 13px;"> </td>
+<td style="width: 14px; height: 13px;"> </td>
+<td style="width: 11px; height: 13px;"> </td>
+<td style="width: 13px; height: 13px;"> </td>
+<td style="width: 11px; height: 13px;"> </td>
+<td style="width: 105.4px; height: 13px;"> </td>
+<td style="width: 139.6px; height: 13px;"> </td>
+</tr>
+<tr style="height: 6px;">
+<td style="width: 31px; height: 6px;">無</td>
+<td style="width: 138px; height: 6px;">英語聽講練習(二)</td>
+<td style="width: 29px; height: 6px;">無</td>
+<td style="width: 10px; height: 6px;">無</td>
+<td style="width: 14px; height: 6px;">無</td>
+<td style="width: 39px; height: 6px;"> </td>
+<td style="width: 10px; height: 6px;"> </td>
+<td style="width: 10px; height: 6px;">4</td>
+<td style="width: 25px; height: 6px;"> </td>
+<td style="width: 14px; height: 6px;"> </td>
+<td style="width: 11px; height: 6px;"> </td>
+<td style="width: 13px; height: 6px;"> </td>
+<td style="width: 11px; height: 6px;"> </td>
+<td style="width: 105.4px; height: 6px;"> </td>
+<td style="width: 139.6px; height: 6px;"> </td>
+</tr>
+<tr style="height: 4px;">
+<td style="width: 31px; height: 4px;">無</td>
+<td style="width: 138px; height: 4px;">通識</td>
+<td style="width: 29px; height: 4px;">無</td>
+<td style="width: 10px; height: 4px;">無</td>
+<td style="width: 14px; height: 4px;">無</td>
+<td style="width: 39px; height: 4px;"> </td>
+<td style="width: 10px; height: 4px;"> </td>
+<td style="width: 10px; height: 4px;">5</td>
+<td style="width: 25px; height: 4px;"> </td>
+<td style="width: 14px; height: 4px;"> </td>
+<td style="width: 11px; height: 4px;"> </td>
+<td style="width: 13px; height: 4px;"> </td>
+<td style="width: 11px; height: 4px;"> </td>
+<td style="width: 105.4px; height: 4px;"> </td>
+<td style="width: 139.6px; height: 4px;"> </td>
+</tr>
+<tr style="height: 15px;">
+<td style="width: 31px; height: 15px;">無</td>
+<td style="width: 138px; height: 15px;">通識</td>
+<td style="width: 29px; height: 15px;">無</td>
+<td style="width: 10px; height: 15px;">無</td>
+<td style="width: 14px; height: 15px;">無</td>
+<td style="width: 39px; height: 15px;"> </td>
+<td style="width: 10px; height: 15px;"> </td>
+<td style="width: 10px; height: 15px;">6</td>
+<td style="width: 25px; height: 15px;"> </td>
+<td style="width: 14px; height: 15px;"> </td>
+<td style="width: 11px; height: 15px;"> </td>
+<td style="width: 13px; height: 15px;"> </td>
+<td style="width: 11px; height: 15px;"> </td>
+<td style="width: 105.4px; height: 15px;"> </td>
+<td style="width: 139.6px; height: 15px;"> </td>
+</tr>
+<tr style="height: 15px;">
+<td style="width: 31px; height: 15px;">無</td>
+<td style="width: 138px; height: 15px;">服務學習</td>
+<td style="width: 29px; height: 15px;">無</td>
+<td style="width: 10px; height: 15px;">無</td>
+<td style="width: 14px; height: 15px;">無</td>
+<td style="width: 39px; height: 15px;"> </td>
+<td style="width: 10px; height: 15px;"> </td>
+<td style="width: 10px; height: 15px;"> </td>
+<td style="width: 25px; height: 15px;">7</td>
+<td style="width: 14px; height: 15px;"> </td>
+<td style="width: 11px; height: 15px;"> </td>
+<td style="width: 13px; height: 15px;"> </td>
+<td style="width: 11px; height: 15px;"> </td>
+<td style="width: 105.4px; height: 15px;"> </td>
+<td style="width: 139.6px; height: 15px;"> </td>
+</tr>
+<tr style="height: 15px;">
+<td style="width: 31px; height: 15px;">無</td>
+<td style="width: 138px; height: 15px;">服務學習</td>
+<td style="width: 29px; height: 15px;">無</td>
+<td style="width: 10px; height: 15px;">無</td>
+<td style="width: 14px; height: 15px;">無</td>
+<td style="width: 39px; height: 15px;"> </td>
+<td style="width: 10px; height: 15px;"> </td>
+<td style="width: 10px; height: 15px;"> </td>
+<td style="width: 25px; height: 15px;">8</td>
+<td style="width: 14px; height: 15px;"> </td>
+<td style="width: 11px; height: 15px;"> </td>
+<td style="width: 13px; height: 15px;"> </td>
+<td style="width: 11px; height: 15px;"> </td>
+<td style="width: 105.4px; height: 15px;"> </td>
+<td style="width: 139.6px; height: 15px;"> </td>
+</tr>
+<tr style="height: 15px;">
+<td style="width: 31px; height: 15px;">無</td>
+<td style="width: 138px; height: 15px;">班週會</td>
+<td style="width: 29px; height: 15px;">無</td>
+<td style="width: 10px; height: 15px;">無</td>
+<td style="width: 14px; height: 15px;">無</td>
+<td style="width: 39px; height: 15px;"> </td>
+<td style="width: 10px; height: 15px;"> </td>
+<td style="width: 10px; height: 15px;"> </td>
+<td style="width: 25px; height: 15px;">9</td>
+<td style="width: 14px; height: 15px;"> </td>
+<td style="width: 11px; height: 15px;"> </td>
+<td style="width: 13px; height: 15px;"> </td>
+<td style="width: 11px; height: 15px;"> </td>
+<td style="width: 105.4px; height: 15px;"> </td>
+<td style="width: 139.6px; height: 15px;"> </td>
+</tr>
+<tr style="height: 15px;">
+<td style="width: 31px; height: 15px;">無</td>
+<td style="width: 138px; height: 15px;">通識講座</td>
+<td style="width: 29px; height: 15px;">無</td>
+<td style="width: 10px; height: 15px;">無</td>
+<td style="width: 14px; height: 15px;">無</td>
+<td style="width: 39px; height: 15px;"> </td>
+<td style="width: 10px; height: 15px;"> </td>
+<td style="width: 10px; height: 15px;"> </td>
+<td style="width: 25px; height: 15px;"> </td>
+<td style="width: 14px; height: 15px;">7</td>
+<td style="width: 11px; height: 15px;"> </td>
+<td style="width: 13px; height: 15px;"> </td>
+<td style="width: 11px; height: 15px;"> </td>
+<td style="width: 105.4px; height: 15px;"> </td>
+<td style="width: 139.6px; height: 15px;"> </td>
+</tr>
+<tr style="height: 15px;">
+<td style="width: 31px; height: 15px;">無</td>
+<td style="width: 138px; height: 15px;">通識講座</td>
+<td style="width: 29px; height: 15px;">無</td>
+<td style="width: 10px; height: 15px;">無</td>
+<td style="width: 14px; height: 15px;">無</td>
+<td style="width: 39px; height: 15px;"> </td>
+<td style="width: 10px; height: 15px;"> </td>
+<td style="width: 10px; height: 15px;"> </td>
+<td style="width: 25px; height: 15px;"> </td>
+<td style="width: 14px; height: 15px;">8</td>
+<td style="width: 11px; height: 15px;"> </td>
+<td style="width: 13px; height: 15px;"> </td>
+<td style="width: 11px; height: 15px;"> </td>
+<td style="width: 105.4px; height: 15px;"> </td>
+<td style="width: 139.6px; height: 15px;"> </td>
+</tr>
+</tbody>
+</table>
 <p><span></span></p><h2>W5</h2>
 <p><span style="background-color: #ffff00;"><strong>更新CMSIMDE</strong></span></p>
 <p>更新完成，從 data&gt;tmp&gt;wcm2021&gt;cmsimde&gt;up_dir 把新的檔案拉進 wcm2021 的資料夾裡</p>
@@ -79,7 +765,91 @@ heroku git:remote -a heroku app名稱</pre>
 </ol>
 <p></p>
 <h2>W8</h2>
-<p>123</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">import requests
+import bs4
+# for os.environ and os.system
+import os
+# for geting html file path
+import pathlib
+# 以下因應改為 Heroku based 程式所需導入模組,  修改步驟 1/6
+from flask import Flask, request 
+from flask_cors import CORS
+ 
+ 
+# 修改步驟 2/6 , 加入 Flask 相關物件設定
+app = Flask(__name__)
+# 此一設定可以讓程式跨網域擷取資料
+CORS(app)
+ 
+# for pythn 3.9,  在近端測試時仍需要設定 proxy, 若使用 Python 3.8 執行則會自動使用系統的 Proxy 設定
+
+'''
+url:  'jclassroom_ajax.php',
+data: { pselyr: pselyr, pselclssroom: pselclssroom },
+'''
+ 
+# 修改步驟 3/6, 試著將程式改為網際模式, 需要套用 Flask 的網際 decorator
+@app.route('/')
+def timeTableList():
+    semester = '1092'
+    classroomno = 'BGA0810'
+    column = True
+ 
+    if semester == None:
+        semester = '1092'
+    if classroomno == None:
+        # BGA0810 電腦輔助設計室
+        classroomno = 'BGA0810'
+         
+    headers = {'X-Requested-With': 'XMLHttpRequest'}
+ 
+    url = 'https://qry.nfu.edu.tw/jclassroom_ajax.php'
+    post_var = {'pselyr': semester, 'pselclssroom': classroomno}
+ 
+    result = requests.post(url, data = post_var, headers = headers)
+ 
+    soup = bs4.BeautifulSoup(result.content, 'lxml')
+ 
+    # 先除掉所有 anchor
+    for a in soup.findAll('a'):
+        # bs3 語法
+        #a.replaceWithChildren()
+        # bs4 語法, 將標註與內容拆開
+        a.unwrap()
+ 
+    # 根據輸出設定, 取出 class='tbcls' 的 table 資料
+    table = soup.find('table', {'class': 'tbcls'})
+ 
+    # 重建 table, 設定邊線為 1 pixel
+    output = "&lt;table border='1'&gt;"
+ 
+    for i in table.contents:
+        # 利用 replace 復原  
+        output += str(i).replace(" ", " ")
+    output += "&lt;/table&gt;"
+    #print(output)
+    # 修改步驟 5/6 , 因為已經將原先可列印出程式的步驟改為 function, 因此必須以 return 將擷取到的網頁資料傳回
+    return output
+     
+# 修改步驟 4/6 , 因為改寫為網際程式後, 下列將內容存檔並自動呼叫 Firefox 的程式碼不再適用, 必須蓋掉
+'''
+# 將 output 寫入 w1_classroom.html
+fileName = "w1_classroom.html"
+with open(fileName, "w", encoding="utf-8") as file:
+    file.write(output)
+# 利用 os.system() 以 default browser 開啟 w1_class_local.html
+filePath = pathlib.Path(__file__).parent.absolute()
+#print(filePath)
+# set firefox as default browser and start url to open html file
+os.system("start file:///" + str(filePath) + "\\" + fileName)
+'''
+ 
+# 修改步驟 6/6, 配合網際程式啟動,  以及 Python 程式執行與納入其他程式執行的特定進行配置
+ 
+if __name__ == '__main__':
+    app.run(host='127.0.0.1', port=8080, debug=True)
+</pre>
+<p><br/><br/></p>
 <h2>W9</h2>
 <p>打期望成績</p>
 <h2>W10</h2>
@@ -88,4 +858,5 @@ heroku git:remote -a heroku app名稱</pre>
 <li><a href="https://sqlitebrowser.org/dl/">https://sqlitebrowser.org/dl/</a> 下載 DB Browser for SQLite - .zip (no installer) for 64-bit</li>
 </ol>
 <h2>W11</h2>
-<pre>至 <a href="http://a.kmol.info:88/">http://a.kmol.info:88/</a> 下載 robodk522_portable.7z</pre>
+<p>至 <a href="http://a.kmol.info:88/">http://a.kmol.info:88/</a> 下載 robodk522_portable.7z</p>
+<h2>W12</h2>
