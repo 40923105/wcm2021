@@ -123,7 +123,7 @@ img.add_border {
                             <li><a href="./../blog/index.html">blog</a></li>
                         </ul>
                       </li>
-                     <li><a href='About.html'>About</a><li class='has-children'><a href='每週上課內容.html'>每週上課內容</a><ul class='dropdown'><li><a href='W1-W2.html'>W1-W2</a><li><a href='W3 分組.html'>W3 分組</a><li><a href='W4.html'>W4</a><li><a href='W5.html'>W5</a><li><a href='W6.html'>W6</a><li><a href='W7.html'>W7</a><li><a href='W8.html'>W8</a><li><a href='W9.html'>W9</a><li><a href='W10.html'>W10</a><li><a href='W11.html'>W11</a><li><a href='W12.html'>W12</a><li><a href='W13.html'>W13</a><li><a href='W14分組連結.html'>W14分組連結</a><li><a href='W15.html'>W15</a><li><a href='w16.html'>w16</a></li></ul><li><a href='123.html'>123</a></li>
+                     <li><a href='About.html'>About</a><li class='has-children'><a href='每週上課內容.html'>每週上課內容</a><ul class='dropdown'><li><a href='W1-W2.html'>W1-W2</a><li><a href='W3 分組.html'>W3 分組</a><li><a href='W4.html'>W4</a><li><a href='W5.html'>W5</a><li><a href='W6.html'>W6</a><li><a href='W7.html'>W7</a><li><a href='W8.html'>W8</a><li><a href='W9.html'>W9</a><li><a href='W10.html'>W10</a><li><a href='W11.html'>W11</a><li><a href='W12.html'>W12</a><li><a href='W13.html'>W13</a><li><a href='W14分組連結.html'>W14分組連結</a><li><a href='W15.html'>W15</a><li><a href='W16 fossil.html'>W16 fossil</a></li></ul><li><a href='123.html'>123</a></li>
                       </ul>
                 </nav>
               </div>
@@ -134,9 +134,24 @@ img.add_border {
           </div>
           
         </header>
-    <div id="tipue_search_content">W15 << <a href='W15.html'>Previous</a> <a href='123.html'>Next</a> >> 123<br /><h1>w16</h1>
-<p>fossil</p>
-<br />W15 << <a href='W15.html'>Previous</a> <a href='123.html'>Next</a> >> 123</div>
+    <div id="tipue_search_content">W15 << <a href='W15.html'>Previous</a> <a href='123.html'>Next</a> >> 123<br /><h1>W16 fossil</h1>
+<p>用@gm帳號進去 <a href="https://fossil.kmol.info/u/wcm/index">https://fossil.kmol.info/u/wcm/index</a> </p>
+<p>到 <a href="https://fossil-scm.org/home/uv/download.html">https://fossil-scm.org/home/uv/download.html</a> 下載 <a href="https://fossil-scm.org/home/uv/fossil-w64-snapshot-20210429.zip">Win<wbr/>dows<wbr/>64</a> 解壓縮至Y:/</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">cd tmp
+mkdir fossil
+cd fossil
+fossil clone https://40923105@fossil.kmol.info/u/40923105 40923105.fossil
+mkdir wd
+cd wd
+mkdir 40923105
+cd 40923105
+fossil open ./../../40923105.fossil
+cd ..
+git clone --recurse-submodules https://github.com/40923105/wcm2021.git
+fossil commit -m "initial add"
+cms
+</pre>
+<p></p><br />W15 << <a href='W15.html'>Previous</a> <a href='123.html'>Next</a> >> 123</div>
         
     <!-- footer -->
       <div class="container">
