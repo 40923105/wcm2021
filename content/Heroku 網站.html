@@ -123,7 +123,7 @@ img.add_border {
                             <li><a href="./../blog/index.html">blog</a></li>
                         </ul>
                       </li>
-                     <li><a href='About.html'>About</a><li class='has-children'><a href='每週上課內容.html'>每週上課內容</a><ul class='dropdown'><li><a href='W1-W2.html'>W1-W2</a><li><a href='W3 分組.html'>W3 分組</a><li><a href='W4.html'>W4</a><li><a href='W5.html'>W5</a><li><a href='W6.html'>W6</a><li><a href='W7.html'>W7</a><li><a href='W8.html'>W8</a><li><a href='W9.html'>W9</a><li><a href='W10.html'>W10</a><li><a href='W11.html'>W11</a><li><a href='W12.html'>W12</a><li><a href='W13.html'>W13</a><li class='has-children'><a href='W14分組連結.html'>W14分組連結</a><ul class='dropdown'><li><a href='分組連結操作成果.html'>分組連結操作成果</a></li></ul><li><a href='W15.html'>W15</a><li class='has-children'><a href='W16 fossil.html'>W16 fossil</a><ul class='dropdown'><li><a href='遇到的問題.html'>遇到的問題</a></li></li></ul></ul><li><a href='Heroku 網站.html'>Heroku 網站</a><li><a href='網路直播.html'>網路直播</a><li class='has-children'><a href='RoboDK 執行.html'>RoboDK 執行</a><ul class='dropdown'><li><a href='教學影片.html'>教學影片</a></li></ul><li><a href='動態網站.html'>動態網站</a></li>
+                     <li><a href='About.html'>About</a><li class='has-children'><a href='每週上課內容.html'>每週上課內容</a><ul class='dropdown'><li><a href='W1-W2.html'>W1-W2</a><li><a href='W3 分組.html'>W3 分組</a><li><a href='W4.html'>W4</a><li><a href='W5.html'>W5</a><li><a href='W6.html'>W6</a><li><a href='W7.html'>W7</a><li><a href='W8.html'>W8</a><li><a href='W9.html'>W9</a><li><a href='W10.html'>W10</a><li><a href='W11.html'>W11</a><li><a href='W12.html'>W12</a><li><a href='W13.html'>W13</a><li class='has-children'><a href='W14分組連結.html'>W14分組連結</a><ul class='dropdown'><li><a href='分組連結操作成果.html'>分組連結操作成果</a></li></ul><li><a href='W15.html'>W15</a><li class='has-children'><a href='W16 fossil.html'>W16 fossil</a><ul class='dropdown'><li><a href='遇到的問題.html'>遇到的問題</a></li></li></ul></ul><li><a href='網路環境.html'>網路環境</a><li><a href='Heroku 網站.html'>Heroku 網站</a><li><a href='網路直播.html'>網路直播</a><li class='has-children'><a href='RoboDK 執行.html'>RoboDK 執行</a><ul class='dropdown'><li><a href='教學影片.html'>教學影片</a></li></ul><li><a href='動態網站.html'>動態網站</a></li>
                       </ul>
                 </nav>
               </div>
@@ -134,8 +134,46 @@ img.add_border {
           </div>
           
         </header>
-    <div id="tipue_search_content">遇到的問題 << <a href='遇到的問題.html'>Previous</a> <a href='網路直播.html'>Next</a> >> 網路直播<br /><h1>Heroku 網站</h1>
-<br />遇到的問題 << <a href='遇到的問題.html'>Previous</a> <a href='網路直播.html'>Next</a> >> 網路直播</div>
+    <div id="tipue_search_content">網路環境 << <a href='網路環境.html'>Previous</a> <a href='網路直播.html'>Next</a> >> 網路直播<br /><h1>Heroku 網站</h1>
+<p>設定Heroku同步倉儲</p>
+<ol>
+<li>
+<p>進到 Heroku 建立一個 Heroku app，名稱為 s+學號</p>
+</li>
+<li>
+<p>修改其命令路徑，修改完要重新啟動已經納入可執行 heroku.exe 的 start_ipv4.bat</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">set path_heroku=%Disk%:\heroku\bin;
+path=%Disk%:;%path_python%;%path_portablegit%;%path_heroku%;</pre>
+</li>
+<li>
+<p><span><span><span>輸入 heroku version 若回應所使用的版本表示上述路徑設定已經成功</span></span></span></p>
+</li>
+<li>
+<p>我們已經知道網路的應用包含 client 與 server，不同 client 採用不同的 proxy 設定與 server 連線, 其中 firefox 作為 WWW 網路協定的 client，有其自己的網路 Proxy 設定，也可以直接使用操作系統的 Proxy 設定</p>
+<p>Chrome 作為 WWW 網路協定的 client，目前 Windows 下的最新版，只能使用操作系統的 Proxy 設定</p>
+<p>而 git 作為 git client 與 github server 連線的 Proxy 設定，則寫在 y:\home_ipv6 下的 .giconfig 中，以 git config --global http.proxy "http://your_proxy:port" 進行設定</p>
+<p>相同的道理 heroku cli 作為<span> </span><a href="https://heroku.com/">https://heroku.com</a><span> </span>伺服器的 client 端, 也有其 Proxy 的設定方式, 也就是在 start_ipv6.bat 中加入</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">REM for heroku login
+set HTTP_PROXY=http://[2001:288:6004:17::53]:3128
+set HTTPS_PROXY=http://[2001:288:6004:17::53]:3128</pre>
+<p>由於使用自己電腦的是用 ipv4，如果加入了上面的 proxy 在之後的登入會遇到一些狀況，所以要在前面加上 REM 使其變成註解</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">REM for heroku login
+REM set HTTP_PROXY=http://[2001:288:6004:17::53]:3128
+REM set HTTPS_PROXY=http://[2001:288:6004:17::53]:3128</pre>
+</li>
+<li>
+<p><span>利用 Heroku 同步 Github Pages 上的網站內容，只需要透過 git remote add，之後只要在 heroku login 狀態下，可以直接利用 git push 在近端設定一個連線到 Heroku 倉儲的代號，就能在每次更新 Github Pages 倉儲後， 再將內容同步至 Heroku</span></p>
+<p>網際內容管理課程將使用 2 種 Heroku app 設定:</p>
+<p>靜態網頁 - 採用 php 方式部署，讓 Heroku 將靜態網頁視為 PHP 程式，利用 index.php 跳轉到 index.html</p>
+<p>動態網頁 - 讓 Heroku 執行 cmsimde/wsgi.py 的方式進行雲端伺服</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">heroku login -i
+heroku git:remote -a heroku app名稱</pre>
+</li>
+<li>
+<p><span>利用 heroku git:remote -a 設定的同步倉儲其推送名稱內定為 "heroku"，使用者只要使用 git push heroku 就可以將改版內容推送到對應的 Heroku app 倉儲</span></p>
+</li>
+</ol>
+<p></p><br />網路環境 << <a href='網路環境.html'>Previous</a> <a href='網路直播.html'>Next</a> >> 網路直播</div>
         
     <!-- footer -->
       <div class="container">
